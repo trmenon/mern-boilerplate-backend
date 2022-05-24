@@ -10,7 +10,7 @@ const createUser = async (req,res)=> {
     try{
         if(userQuery?.exist== true) {
             res.status(200).json({
-                success: true, 
+                success: false, 
                 message:"User already Exist", 
                 data: userQuery?.data
             });            
