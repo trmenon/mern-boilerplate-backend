@@ -1,6 +1,5 @@
 {
-    "database_example": "mongodb+srv://FHDatabaseUser:FHDatabasePassword@freshharvestcluster.ws69n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "database": "mongodb+srv://testUser:testPassword@testcluster.xaglf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "database": "mongodb+srv://exela-username:exela-password@exela-challenge-cluster.abfq9sh.mongodb.net/?retryWrites=true&w=majority",
     "server": {
         "port": 8000
     },

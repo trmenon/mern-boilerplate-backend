@@ -40,7 +40,6 @@ app.use((req,res,next)=> {
 
 // Routing
 app.use("/api/v1/user", router.userRouter);
-app.use("/api/v1/theme", router.themeRouter);
 
 // HTTP SERVER
 const httpServer = app.listen(PORT, (err)=> {

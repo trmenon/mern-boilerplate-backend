@@ -19,16 +19,10 @@ const createUser = async (req,res)=> {
             // Call to create new user            
             const data = {...req.body};            
             const newUser = await userServices.createNewUser(data);
-            const themeData = {
-                user: newUser?._id,
-                displayString: `${newUser?.firstName[0]}${newUser?.lastName[0]}`,
-                avatarTheme: "primary"
-            };
-            const newTheme = await themeServices.createNewTheme(themeData);
             res.status(200).json({
                 success: true, 
                 message: "New user created", 
-                data: {newUser, newTheme}
+                data: newUser
             });
         }
     }catch(err){
@@ -100,9 +94,51 @@ const signout = (req, res)=> {
     });
 };
 
+// User Profile Card Fetch [CONTROLLER]
+const profileCardController = async (req, res)=> {
+    try {
+        if(req?.params?.id) {
+            const user = await userServices.getUserByIdService(req?.params?.id);
+            if(user?.exist === false) {
+                res.status(200).json({
+                    success: false, 
+                    message: "User does not exist", 
+                    data: {}
+                });
+            }
+            if(user?.exist === true) {
+                res.status(200).json({
+                    success: true, 
+                    message: "User Prifile archived", 
+                    data: {
+                        name: `${user?.data?.firstName} ${user?.data?.lastName}`,
+                        email: user?.data?.email,
+                        joined: user?.data?.createdAt
+                    }
+                });
+            }
+        }else {
+            res.status(200).json({
+                success: false, 
+                message: "User Id not requested", 
+                data: {}
+            }); 
+        }        
+    }catch(err) {
+        console.log("[ERROR] User Profile Card Fetch");
+        console.log(err);   
+        res.status(200).json({
+            success: false, 
+            message: "API failed", 
+            data: {}
+        });    
+    }
+    
+}
 
 module.exports= {
     createUser,
     signin,
     signout,
+    profileCardController
 }
